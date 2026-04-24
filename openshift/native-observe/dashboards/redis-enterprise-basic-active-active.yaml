@@ -59,7 +59,7 @@ data:
               "steppedLine": false,
               "targets": [
                 {
-                  "expr": "sum by (cluster) (rate(database_syncer_ingress_bytes{namespace=\"$namespace\", syncer_type=\"crdt\", cluster=\"$cluster\"}[1m]))",
+                  "expr": "sum by (cluster) (rate(database_syncer_ingress_bytes{namespace=\"$namespace\", syncer_type=\"crdt\", cluster=\"$cluster\"}[$aggregation]))",
                   "format": "time_series",
                   "intervalFactor": 2,
                   "legendFormat": "{{cluster}}",
@@ -288,7 +288,7 @@ data:
               "steppedLine": false,
               "targets": [
                 {
-                  "expr": "rate(database_syncer_ingress_bytes_decompressed{namespace=\"$namespace\", cluster=\"$cluster\"}[1m])",
+                  "expr": "rate(database_syncer_ingress_bytes_decompressed{namespace=\"$namespace\", cluster=\"$cluster\"}[$aggregation])",
                   "format": "time_series",
                   "intervalFactor": 2,
                   "legendFormat": "{{cluster}}",

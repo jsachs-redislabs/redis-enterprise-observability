@@ -228,7 +228,7 @@ data:
               "tableColumn": "",
               "targets": [
                 {
-                  "expr": "(sum by (cluster) (irate (endpoint_read_requests{namespace=\"$namespace\", cluster=\"$cluster\"}[1m]))) + (sum by (cluster) (irate(endpoint_write_requests{namespace=\"$namespace\", cluster=\"$cluster\"}[1m]))) + (sum by(cluster) (irate (endpoint_other_requests{namespace=\"$namespace\", cluster=\"$cluster\"}[1m])))",
+                  "expr": "(sum by (cluster) (irate (endpoint_read_requests{namespace=\"$namespace\", cluster=\"$cluster\"}[$aggregation]))) + (sum by (cluster) (irate(endpoint_write_requests{namespace=\"$namespace\", cluster=\"$cluster\"}[$aggregation]))) + (sum by(cluster) (irate (endpoint_other_requests{namespace=\"$namespace\", cluster=\"$cluster\"}[$aggregation])))",
                   "format": "time_series",
                   "intervalFactor": 2,
                   "legendFormat": "__auto",
@@ -315,7 +315,7 @@ data:
               "tableColumn": "",
               "targets": [
                 {
-                  "expr": "(sum by (cluster, db)(irate(endpoint_read_requests_latency_histogram_sum{namespace=\"$namespace\", cluster=\"$cluster\", db=\"$db\"}[1m]))  + sum by(cluster, db) (irate(endpoint_write_requests_latency_histogram_sum{namespace=\"$namespace\", cluster=\"$cluster\", db=\"$db\"}[1m]) ) + sum by (cluster, db) (irate(endpoint_other_requests_latency_histogram_sum{namespace=\"$namespace\", cluster=\"$cluster\", db=\"$db\"}[1m]))) / ((sum by (cluster, db) (irate(endpoint_read_requests{namespace=\"$namespace\", cluster=\"$cluster\", db=\"$db\"}[1m]))) + (sum by(cluster, db)(irate(endpoint_write_requests{namespace=\"$namespace\", cluster=\"$cluster\", db=\"$db\"}[1m]))) + (sum by(cluster, db)(irate(endpoint_other_requests{namespace=\"$namespace\", cluster=\"$cluster\", db=\"$db\"}[1m])))) / 1000",
+                  "expr": "(sum by (cluster, db)(irate(endpoint_read_requests_latency_histogram_sum{namespace=\"$namespace\", cluster=\"$cluster\", db=\"$db\"}[$aggregation]))  + sum by(cluster, db) (irate(endpoint_write_requests_latency_histogram_sum{namespace=\"$namespace\", cluster=\"$cluster\", db=\"$db\"}[$aggregation]) ) + sum by (cluster, db) (irate(endpoint_other_requests_latency_histogram_sum{namespace=\"$namespace\", cluster=\"$cluster\", db=\"$db\"}[$aggregation]))) / ((sum by (cluster, db) (irate(endpoint_read_requests{namespace=\"$namespace\", cluster=\"$cluster\", db=\"$db\"}[$aggregation]))) + (sum by(cluster, db)(irate(endpoint_write_requests{namespace=\"$namespace\", cluster=\"$cluster\", db=\"$db\"}[$aggregation]))) + (sum by(cluster, db)(irate(endpoint_other_requests{namespace=\"$namespace\", cluster=\"$cluster\", db=\"$db\"}[$aggregation])))) / 1000",
                   "format": "time_series",
                   "intervalFactor": 2,
                   "legendFormat": "__auto",
@@ -390,7 +390,7 @@ data:
               "tableColumn": "",
               "targets": [
                 {
-                  "expr": "sum by(cluster, db)(irate(endpoint_read_requests{namespace=\"$namespace\", cluster=\"$cluster\", db=\"$db\"}[1m]) + irate(endpoint_write_requests{namespace=\"$namespace\", cluster=\"$cluster\", db=\"$db\"}[1m]) + irate(endpoint_other_requests{namespace=\"$namespace\", cluster=\"$cluster\", db=\"$db\"}[1m]))",
+                  "expr": "sum by(cluster, db)(irate(endpoint_read_requests{namespace=\"$namespace\", cluster=\"$cluster\", db=\"$db\"}[$aggregation]) + irate(endpoint_write_requests{namespace=\"$namespace\", cluster=\"$cluster\", db=\"$db\"}[$aggregation]) + irate(endpoint_other_requests{namespace=\"$namespace\", cluster=\"$cluster\", db=\"$db\"}[$aggregation]))",
                   "format": "time_series",
                   "intervalFactor": 2,
                   "legendFormat": "A",
@@ -465,7 +465,7 @@ data:
               "tableColumn": "",
               "targets": [
                 {
-                  "expr": "sum by(cluster) (irate(redis_server_expired_keys{namespace=\"$namespace\", role=\"master\", cluster=\"$cluster\"}[1m]))",
+                  "expr": "sum by(cluster) (irate(redis_server_expired_keys{namespace=\"$namespace\", role=\"master\", cluster=\"$cluster\"}[$aggregation]))",
                   "format": "time_series",
                   "intervalFactor": 2,
                   "legendFormat": "A",

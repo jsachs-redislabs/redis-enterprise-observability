@@ -59,7 +59,7 @@ data:
               "steppedLine": false,
               "targets": [
                 {
-                  "expr": "(avg by(node) (irate(node_cpu_seconds_total{namespace=\"$namespace\", mode=\"system\", cluster=\"$cluster\", node=\"$node\"}[1m]))) + (avg by(node) (irate(node_cpu_seconds_total{namespace=\"$namespace\", mode=\"user\", cluster=\"$cluster\", node=\"$node\"}[1m])))",
+                  "expr": "(avg by(node) (irate(node_cpu_seconds_total{namespace=\"$namespace\", mode=\"system\", cluster=\"$cluster\", node=\"$node\"}[$aggregation]))) + (avg by(node) (irate(node_cpu_seconds_total{namespace=\"$namespace\", mode=\"user\", cluster=\"$cluster\", node=\"$node\"}[$aggregation])))",
                   "format": "time_series",
                   "intervalFactor": 2,
                   "legendFormat": "user+system",
@@ -67,7 +67,7 @@ data:
                   "step": 600
                 },
                 {
-                  "expr": "1- (avg by(node)(irate(node_cpu_seconds_total{namespace=\"$namespace\", mode=\"idle\",cluster=\"$cluster\", node=\"$node\"}[1m]))) - (avg by(node)(irate(node_cpu_seconds_total{namespace=\"$namespace\", mode=\"system\",cluster=\"$cluster\", node=\"$node\"}[1m]))) - (avg by(node)(irate(node_cpu_seconds_total{namespace=\"$namespace\", mode=\"user\",cluster=\"$cluster\", node=\"$node\"}[1m]))) unless (avg by(node)(irate(node_cpu_seconds_total{namespace=\"$namespace\", mode=\"nice\",cluster=\"$cluster\", node=\"$node\"}[1m])))",
+                  "expr": "1- (avg by(node)(irate(node_cpu_seconds_total{namespace=\"$namespace\", mode=\"idle\",cluster=\"$cluster\", node=\"$node\"}[$aggregation]))) - (avg by(node)(irate(node_cpu_seconds_total{namespace=\"$namespace\", mode=\"system\",cluster=\"$cluster\", node=\"$node\"}[$aggregation]))) - (avg by(node)(irate(node_cpu_seconds_total{namespace=\"$namespace\", mode=\"user\",cluster=\"$cluster\", node=\"$node\"}[$aggregation]))) unless (avg by(node)(irate(node_cpu_seconds_total{namespace=\"$namespace\", mode=\"nice\",cluster=\"$cluster\", node=\"$node\"}[$aggregation])))",
                   "format": "time_series",
                   "intervalFactor": 1,
                   "legendFormat": "other",
@@ -75,7 +75,7 @@ data:
                   "step": 300
                 },
                 {
-                  "expr": "avg by(node)(irate(dmcproxy_process_cpu_user_seconds_total{namespace=\"$namespace\", cluster=\"$cluster\", node=\"$node\"}[1m]))",
+                  "expr": "avg by(node)(irate(dmcproxy_process_cpu_user_seconds_total{namespace=\"$namespace\", cluster=\"$cluster\", node=\"$node\"}[$aggregation]))",
                   "format": "time_series",
                   "intervalFactor": 2,
                   "legendFormat": "dmcproxy (100% = 1 core)",
@@ -83,7 +83,7 @@ data:
                   "step": 600
                 },
                 {
-                  "expr": "avg by(node)(irate(node_cpu_seconds_total{namespace=\"$namespace\", mode=~\"system|user\", cluster=\"$cluster\", node=\"$node\"}[1m]))",
+                  "expr": "avg by(node)(irate(node_cpu_seconds_total{namespace=\"$namespace\", mode=~\"system|user\", cluster=\"$cluster\", node=\"$node\"}[$aggregation]))",
                   "format": "time_series",
                   "intervalFactor": 2,
                   "legendFormat": "shards (100% = 1 core)",
@@ -162,7 +162,7 @@ data:
               "steppedLine": false,
               "targets": [
                 {
-                  "expr": "sum by(node)(irate(node_network_receive_bytes_total{namespace=\"$namespace\", cluster=\"$cluster\", node=\"$node\"}[1m]))",
+                  "expr": "sum by(node)(irate(node_network_receive_bytes_total{namespace=\"$namespace\", cluster=\"$cluster\", node=\"$node\"}[$aggregation]))",
                   "format": "time_series",
                   "intervalFactor": 2,
                   "legendFormat": "Ingress for node {{node}}",
@@ -170,7 +170,7 @@ data:
                   "step": 1200
                 },
                 {
-                  "expr": "sum by(node)(irate(node_network_transmit_bytes_total{namespace=\"$namespace\", cluster=\"$cluster\", node=\"$node\"}[1m]))",
+                  "expr": "sum by(node)(irate(node_network_transmit_bytes_total{namespace=\"$namespace\", cluster=\"$cluster\", node=\"$node\"}[$aggregation]))",
                   "format": "time_series",
                   "intervalFactor": 2,
                   "legendFormat": "egress for node {{node}}",

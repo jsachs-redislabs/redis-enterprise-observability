@@ -59,7 +59,7 @@ data:
               "steppedLine": false,
               "targets": [
                 {
-                  "expr": "(sum(irate(endpoint_read_requests_latency_histogram_sum{namespace=\"$namespace\", db=\"$db\", cluster=\"$cluster\"}[1m]))/sum(irate(endpoint_read_requests{namespace=\"$namespace\", db=\"$db\", cluster=\"$cluster\"}[1m])))/1000000",
+                  "expr": "(sum(irate(endpoint_read_requests_latency_histogram_sum{namespace=\"$namespace\", db=\"$db\", cluster=\"$cluster\"}[$aggregation]))/sum(irate(endpoint_read_requests{namespace=\"$namespace\", db=\"$db\", cluster=\"$cluster\"}[$aggregation])))/1000000",
                   "format": "time_series",
                   "intervalFactor": 2,
                   "legendFormat": "Read",
@@ -67,7 +67,7 @@ data:
                   "step": 2400
                 },
                 {
-                  "expr": "(sum(irate(endpoint_write_requests_latency_histogram_sum{namespace=\"$namespace\", db=\"$db\", cluster=\"$cluster\"}[1m]))/sum(irate(endpoint_write_requests{namespace=\"$namespace\", db=\"$db\", cluster=\"$cluster\"}[1m])))/1000000",
+                  "expr": "(sum(irate(endpoint_write_requests_latency_histogram_sum{namespace=\"$namespace\", db=\"$db\", cluster=\"$cluster\"}[$aggregation]))/sum(irate(endpoint_write_requests{namespace=\"$namespace\", db=\"$db\", cluster=\"$cluster\"}[$aggregation])))/1000000",
                   "format": "time_series",
                   "intervalFactor": 2,
                   "legendFormat": "Write",
@@ -240,7 +240,7 @@ data:
               "tableColumn": "",
               "targets": [
                 {
-                  "expr": "sum by (db, cluster) (irate(endpoint_read_requests{namespace=\"$namespace\", db=\"$db\", cluster=\"$cluster\"}[1m]) + irate(endpoint_write_requests{namespace=\"$namespace\", db=\"$db\", cluster=\"$cluster\"}[1m]) + irate(endpoint_other_requests{namespace=\"$namespace\", db=\"$db\", cluster=\"$cluster\"}[1m]))",
+                  "expr": "sum by (db, cluster) (irate(endpoint_read_requests{namespace=\"$namespace\", db=\"$db\", cluster=\"$cluster\"}[$aggregation]) + irate(endpoint_write_requests{namespace=\"$namespace\", db=\"$db\", cluster=\"$cluster\"}[$aggregation]) + irate(endpoint_other_requests{namespace=\"$namespace\", db=\"$db\", cluster=\"$cluster\"}[$aggregation]))",
                   "format": "time_series",
                   "intervalFactor": 2,
                   "legendFormat": "__auto",
@@ -296,7 +296,7 @@ data:
               "steppedLine": false,
               "targets": [
                 {
-                  "expr": "sum by (db, cluster) (irate(endpoint_read_requests{namespace=\"$namespace\", db=\"$db\", cluster=\"$cluster\"}[1m]))",
+                  "expr": "sum by (db, cluster) (irate(endpoint_read_requests{namespace=\"$namespace\", db=\"$db\", cluster=\"$cluster\"}[$aggregation]))",
                   "format": "time_series",
                   "intervalFactor": 2,
                   "legendFormat": "read",
@@ -304,7 +304,7 @@ data:
                   "step": 10
                 },
                 {
-                  "expr": "sum by (db, cluster) (irate(endpoint_write_requests{namespace=\"$namespace\", db=\"$db\", cluster=\"$cluster\"}[1m]))",
+                  "expr": "sum by (db, cluster) (irate(endpoint_write_requests{namespace=\"$namespace\", db=\"$db\", cluster=\"$cluster\"}[$aggregation]))",
                   "format": "time_series",
                   "intervalFactor": 2,
                   "legendFormat": "write",
@@ -312,7 +312,7 @@ data:
                   "step": 10
                 },
                 {
-                  "expr": "sum by(db, cluster) (irate(endpoint_other_requests{namespace=\"$namespace\", db=\"$db\", cluster=\"$cluster\"}[1m]))",
+                  "expr": "sum by(db, cluster) (irate(endpoint_other_requests{namespace=\"$namespace\", db=\"$db\", cluster=\"$cluster\"}[$aggregation]))",
                   "format": "time_series",
                   "intervalFactor": 2,
                   "legendFormat": "other",
@@ -485,7 +485,7 @@ data:
               "tableColumn": "",
               "targets": [
                 {
-                  "expr": "sum by (db, cluster) (irate(redis_server_expired_keys{namespace=\"$namespace\", role=\"master\", cluster=\"$cluster\", db=\"$db\"}[1m]))",
+                  "expr": "sum by (db, cluster) (irate(redis_server_expired_keys{namespace=\"$namespace\", role=\"master\", cluster=\"$cluster\", db=\"$db\"}[$aggregation]))",
                   "format": "time_series",
                   "intervalFactor": 2,
                   "legendFormat": "Expired Keys",
@@ -635,7 +635,7 @@ data:
               "tableColumn": "",
               "targets": [
                 {
-                  "expr": "(sum by (db, cluster) (irate(redis_server_keyspace_read_misses{namespace=\"$namespace\", role=\"master\", cluster=\"$cluster\", db=\"$db\"}[1m]))) + (sum by (db, cluster) (irate(redis_server_keyspace_write_misses{namespace=\"$namespace\", role=\"master\", cluster=\"$cluster\", db=\"$db\"}[1m])))",
+                  "expr": "(sum by (db, cluster) (irate(redis_server_keyspace_read_misses{namespace=\"$namespace\", role=\"master\", cluster=\"$cluster\", db=\"$db\"}[$aggregation]))) + (sum by (db, cluster) (irate(redis_server_keyspace_write_misses{namespace=\"$namespace\", role=\"master\", cluster=\"$cluster\", db=\"$db\"}[$aggregation])))",
                   "format": "time_series",
                   "intervalFactor": 2,
                   "legendFormat": "__auto",
@@ -710,7 +710,7 @@ data:
               "tableColumn": "",
               "targets": [
                 {
-                  "expr": "sum by(db, cluster) (irate(namedprocess_namegroup_thread_cpu_seconds_total{namespace=\"$namespace\", mode=\"system\", threadname=~\"redis-server.*\", cluster=\"$cluster\", db=\"$db\"}[1m]))",
+                  "expr": "sum by(db, cluster) (irate(namedprocess_namegroup_thread_cpu_seconds_total{namespace=\"$namespace\", mode=\"system\", threadname=~\"redis-server.*\", cluster=\"$cluster\", db=\"$db\"}[$aggregation]))",
                   "format": "time_series",
                   "intervalFactor": 2,
                   "legendFormat": "__auto",
@@ -785,7 +785,7 @@ data:
               "tableColumn": "",
               "targets": [
                 {
-                  "expr": "sum by(db, cluster) (irate(namedprocess_namegroup_thread_cpu_seconds_total{namespace=\"$namespace\", mode=\"user\", threadname=~\"redis-server.*\", db=\"$db\", cluster=\"$cluster\"}[1m]))",
+                  "expr": "sum by(db, cluster) (irate(namedprocess_namegroup_thread_cpu_seconds_total{namespace=\"$namespace\", mode=\"user\", threadname=~\"redis-server.*\", db=\"$db\", cluster=\"$cluster\"}[$aggregation]))",
                   "format": "time_series",
                   "intervalFactor": 2,
                   "legendFormat": "__auto",

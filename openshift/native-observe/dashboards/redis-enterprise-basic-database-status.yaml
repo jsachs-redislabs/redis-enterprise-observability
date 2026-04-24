@@ -121,7 +121,7 @@ data:
               ],
               "datasource": null,
               "decimals": null,
-              "format": "percent",
+              "format": "percentunit",
               "gauge": {
                 "maxValue": 100,
                 "minValue": 0,
@@ -666,7 +666,7 @@ data:
               ],
               "datasource": null,
               "decimals": null,
-              "format": "percent",
+              "format": "percentunit",
               "gauge": {
                 "maxValue": 100,
                 "minValue": 0,
@@ -741,7 +741,7 @@ data:
               ],
               "datasource": null,
               "decimals": null,
-              "format": "percent",
+              "format": "percentunit",
               "gauge": {
                 "maxValue": 100,
                 "minValue": 0,

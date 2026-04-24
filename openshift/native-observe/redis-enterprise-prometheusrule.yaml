@@ -211,7 +211,8 @@ spec:
             description: "Low on Memory - Cluster: {{$labels.cluster}} Memory Free: {{$value}}%"
             runbook: https://redis.io/docs/latest/integrate/prometheus-with-redis-enterprise/observability/#memory
         - alert: Node CPU Usage
-          expr: rate(namedprocess_namegroup_cpu_seconds_total[5m]) >= 0
+          # Example threshold: alert when a Redis Enterprise process consumes more than 80% of a CPU core.
+          expr: (rate(namedprocess_namegroup_cpu_seconds_total[5m]) * 100) > 80
           for: 5m
           labels:
             severity: critical
@@ -242,7 +243,8 @@ spec:
             description: "Slave has no master - Cluster: {{$labels.cluster}} Shard: {{$labels.redis}} Node: {{$labels.node}}"
             runbook: https://redis.io/docs/latest/integrate/prometheus-with-redis-enterprise/observability/#cpu
         - alert: Shard CPU Usage
-          expr: rate(namedprocess_namegroup_cpu_seconds_total[5m]) >= 0
+          # Example threshold: alert when a Redis shard process consumes more than 80% of a CPU core.
+          expr: (rate(namedprocess_namegroup_cpu_seconds_total[5m]) * 100) > 80
           for: 5m
           labels:
             severity: notification
@@ -252,7 +254,8 @@ spec:
             description: "Busy Shard - Cluster: {{$labels.cluster}} Shard: {{$labels.redis}} Node: {{$labels.node}} CPU: {{$value}}%"
             runbook: https://redis.io/docs/latest/integrate/prometheus-with-redis-enterprise/observability/#cpu
         - alert: Hot Master Shard
-          expr: rate(namedprocess_namegroup_cpu_seconds_total{role="master"}[5m]) >= 0
+          # Example threshold: alert when a master shard consumes more than 80% of a CPU core.
+          expr: (rate(namedprocess_namegroup_cpu_seconds_total{role="master"}[5m]) * 100) > 80
           for: 1m
           labels:
             severity: critical

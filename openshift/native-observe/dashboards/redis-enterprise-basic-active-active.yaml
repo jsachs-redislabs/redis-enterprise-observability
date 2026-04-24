@@ -386,7 +386,7 @@ data:
               "tableColumn": "",
               "targets": [
                 {
-                  "expr": "bdb_crdt_syncer_pending_local_writes_max",
+                  "expr": "bdb_crdt_syncer_pending_local_writes_max{namespace=\"$namespace\", cluster=\"$cluster\"}",
                   "format": "time_series",
                   "intervalFactor": 2,
                   "legendFormat": "__auto",

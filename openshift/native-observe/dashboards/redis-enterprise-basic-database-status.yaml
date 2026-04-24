@@ -59,7 +59,7 @@ data:
               "steppedLine": false,
               "targets": [
                 {
-                  "expr": "(sum(irate(endpoint_read_requests_latency_histogram_sum{namespace=\"$namespace\", db=\"$db\"}[1m]))/sum(irate(endpoint_read_requests{namespace=\"$namespace\", db=\"$db\"}[1m])))/1000000",
+                  "expr": "(sum(irate(endpoint_read_requests_latency_histogram_sum{namespace=\"$namespace\", db=\"$db\", cluster=\"$cluster\"}[1m]))/sum(irate(endpoint_read_requests{namespace=\"$namespace\", db=\"$db\", cluster=\"$cluster\"}[1m])))/1000000",
                   "format": "time_series",
                   "intervalFactor": 2,
                   "legendFormat": "Read",
@@ -67,7 +67,7 @@ data:
                   "step": 2400
                 },
                 {
-                  "expr": "(sum(irate(endpoint_write_requests_latency_histogram_sum{namespace=\"$namespace\", db=\"$db\"}[1m]))/sum(irate(endpoint_write_requests{namespace=\"$namespace\", db=\"$db\"}[1m])))/1000000",
+                  "expr": "(sum(irate(endpoint_write_requests_latency_histogram_sum{namespace=\"$namespace\", db=\"$db\", cluster=\"$cluster\"}[1m]))/sum(irate(endpoint_write_requests{namespace=\"$namespace\", db=\"$db\", cluster=\"$cluster\"}[1m])))/1000000",
                   "format": "time_series",
                   "intervalFactor": 2,
                   "legendFormat": "Write",
